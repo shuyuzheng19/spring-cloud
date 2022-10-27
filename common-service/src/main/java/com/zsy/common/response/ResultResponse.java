@@ -26,6 +26,10 @@ public class ResultResponse {
 
     private Object data;
 
+    private ResultResponse(){
+
+    }
+
     private ResultResponse(Builder builder){
         this.code=builder.code;
         this.message=builder.message;
