@@ -65,6 +65,13 @@ public class ResultResponse {
                 .build();
     }
 
+    public static ResultResponse error(String message){
+        return new Builder()
+                .code(DEFAULT_ERROR.getCode())
+                .message(message)
+                .build();
+    }
+
     public static ResultResponse error(ResultMessageStatus messageStatus){
         return new Builder()
                 .code(messageStatus.getCode())

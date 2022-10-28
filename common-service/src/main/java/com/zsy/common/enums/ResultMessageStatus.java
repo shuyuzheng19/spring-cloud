@@ -21,7 +21,7 @@ public enum  ResultMessageStatus {
 
 
     /*=====================错误返回=====================*/
-    DEFAULT_ERROR(500,"服务器异常"),
+    DEFAULT_ERROR(500,"服务器异常,请稍后重试"),
     ;
 
     private int code;

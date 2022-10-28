@@ -1,0 +1,29 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /feign
+#  Eureka配置
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka
+spring:
+  application:
+    name: feign-service
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        forceOpen: false
+        errorThresholdPercentage: 50
+        sleepWindowInMilliseconds: 3000
+        requestVolumeThreshold: 2
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000

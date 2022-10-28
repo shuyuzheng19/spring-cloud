@@ -6,12 +6,15 @@
 
     <groupId>org.example</groupId>
     <artifactId>spring-cloud-study-2022-10-26</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
         <module>eureka-service[8001]</module>
         <module>producer-service[8080]</module>
         <module>common-service</module>
+        <module>ribbon-service[8081]</module>
+        <module>feign-service[8082]</module>
     </modules>
 
     <parent>

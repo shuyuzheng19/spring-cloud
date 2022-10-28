@@ -42,3 +42,5 @@ spring:
               packages: '*'
       enable-auto-commit: true
       group-id: BOOK
+  application:
+    name: producer-service
