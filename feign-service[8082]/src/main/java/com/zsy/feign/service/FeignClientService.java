@@ -24,20 +24,20 @@ public interface FeignClientService {
     ResultResponse registeredUser(@RequestBody Map<String,Object>map);
 
     @PostMapping("/addRole")
-    ResultResponse addRole(@RequestHeader(TokenConstants.TOKEN_HEADER) String token, @RequestBody Map<String,Object> role);
+    ResultResponse addRole(@RequestBody Map<String,Object> role);
 
     @PostMapping("/addPermission")
-    ResultResponse addPermission(@RequestHeader(value = TokenConstants.TOKEN_HEADER) String token,@RequestBody  Map<String,Object>  permission);
+    ResultResponse addPermission(@RequestBody  Map<String,Object>  permission);
 
     @GetMapping("/roleToUser/{roleName}/{username}")
-    ResultResponse roleToUser(@RequestHeader(value = TokenConstants.TOKEN_HEADER) String token, @PathVariable("roleName") String roleName, @PathVariable("username") String username);
+    ResultResponse roleToUser( @PathVariable("roleName") String roleName, @PathVariable("username") String username);
 
     @GetMapping("/perToUser/{perName}/{username}")
-    ResultResponse permissionToUser(@RequestHeader(value = TokenConstants.TOKEN_HEADER) String token,@PathVariable("perName") String permissionName,@PathVariable("username") String username);
+    ResultResponse permissionToUser(@PathVariable("perName") String permissionName,@PathVariable("username") String username);
 
     @GetMapping("/delete/role/{roleName}")
-    ResultResponse deleteRole(@RequestHeader(value = TokenConstants.TOKEN_HEADER) String token,@PathVariable("roleName") String roleName);
+    ResultResponse deleteRole(@PathVariable("roleName") String roleName);
 
     @GetMapping("/delete/permission/{permissionName}")
-    ResultResponse deletePermission(@RequestHeader(value = TokenConstants.TOKEN_HEADER) String token,@PathVariable("permissionName") String permissionName);
+    ResultResponse deletePermission(@PathVariable("permissionName") String permissionName);
 }

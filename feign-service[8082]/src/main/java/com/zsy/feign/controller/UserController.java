@@ -1,6 +1,5 @@
 package com.zsy.feign.controller;
 
-import com.zsy.common.constants.TokenConstants;
 import com.zsy.common.response.ResultResponse;
 import com.zsy.feign.service.FeignClientService;
 import org.springframework.web.bind.annotation.*;
@@ -32,32 +31,32 @@ public class UserController{
     }
 
     @PostMapping("/addRole")
-    public ResultResponse addRole(@RequestHeader(TokenConstants.TOKEN_HEADER) String token,@RequestBody Map<String, Object> role) {
-        return feignClientService.addRole(token,role);
+    public ResultResponse addRole(@RequestBody Map<String, Object> role) {
+        return feignClientService.addRole(role);
     }
 
     @PostMapping("/addPermission")
-    public ResultResponse addPermission(@RequestHeader(TokenConstants.TOKEN_HEADER) String token,@RequestBody Map<String, Object> permission) {
-        return feignClientService.addPermission(token,permission);
+    public ResultResponse addPermission(@RequestBody Map<String, Object> permission) {
+        return feignClientService.addPermission(permission);
     }
 
     @GetMapping("/roleToUser/{roleName}/{username}")
-    public ResultResponse roleToUser(@RequestHeader(TokenConstants.TOKEN_HEADER) String token, @PathVariable String roleName, @PathVariable String username) {
-        return feignClientService.roleToUser(token,roleName,username);
+    public ResultResponse roleToUser( @PathVariable String roleName, @PathVariable String username) {
+        return feignClientService.roleToUser(roleName,username);
     }
 
     @GetMapping("/perToUser/{perName}/{username}")
-    public ResultResponse permissionToUser(@RequestHeader(TokenConstants.TOKEN_HEADER) String token, @PathVariable("perName") String permissionName, @PathVariable String username) {
-        return feignClientService.permissionToUser(token,permissionName,username);
+    public ResultResponse permissionToUser( @PathVariable("perName") String permissionName, @PathVariable String username) {
+        return feignClientService.permissionToUser(permissionName,username);
     }
 
     @GetMapping("/delete/role/{roleName}")
-    public ResultResponse deleteRole(@RequestHeader(TokenConstants.TOKEN_HEADER) String token, @PathVariable String roleName) {
-        return feignClientService.deleteRole(token,roleName);
+    public ResultResponse deleteRole( @PathVariable String roleName) {
+        return feignClientService.deleteRole(roleName);
     }
 
     @GetMapping("/delete/permission/{permissionName}")
-    public ResultResponse deletePermission(@RequestHeader(TokenConstants.TOKEN_HEADER) String token, @PathVariable String permissionName) {
-        return feignClientService.deletePermission(token,permissionName);
+    public ResultResponse deletePermission( @PathVariable String permissionName) {
+        return feignClientService.deletePermission(permissionName);
     }
 }
