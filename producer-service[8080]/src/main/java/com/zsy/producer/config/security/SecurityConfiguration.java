@@ -45,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(HttpMethod.POST,"/user/login").permitAll();
+        http.authorizeRequests().antMatchers("/user/login","/user/registered").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(loginFilter());
         http.addFilterBefore(jwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -80,7 +80,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     public List<String> noLoginRequiredUris(){
         return Arrays.asList(
-                "/user/login"
+                "/user/login",
+                "/user/registered"
         );
     }
 

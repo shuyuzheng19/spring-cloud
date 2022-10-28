@@ -3,6 +3,7 @@ package com.zsy.producer.config.security.filter;
 import com.zsy.common.enums.ResultMessageStatus;
 import com.zsy.common.response.ResultResponse;
 import com.zsy.producer.dto.UserDto;
+import com.zsy.producer.entity.User;
 import com.zsy.producer.repository.UserRepository;
 import com.zsy.producer.service.MyUserDetails;
 import com.zsy.producer.service.redis.TokenService;
@@ -49,8 +50,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         MyUserDetails details = (MyUserDetails) authResult.getPrincipal();
-        UserDto userDto=details.getUserDto();
-        TokenInfoResponse tokenInfo = tokenService.createTokenToRedis(userDto);
+        User user=details.getUser();
+        TokenInfoResponse tokenInfo = tokenService.createTokenToRedis(user);
         HttpUtils.writeJson(response, ResultResponse.success(ResultMessageStatus.LOGIN_SUCCESS,tokenInfo));
     }
 

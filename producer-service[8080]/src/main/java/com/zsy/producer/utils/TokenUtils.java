@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class TokenUtils {
     private static final Algorithm DEFAULT_ALGORITHM=Algorithm.HMAC256(TokenConstants.TOKEN_ENCRYPT_STR);
 
-    public static String createAccessToken(UserDto user){
+    public static String createAccessToken(User user){
         return JWT.create()
                 .withSubject(user.getUsername())
                 .withIssuer(user.getUsername())

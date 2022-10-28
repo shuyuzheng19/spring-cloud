@@ -1,15 +1,13 @@
 package com.zsy.producer.service;
 
 import com.zsy.producer.dto.UserDto;
+import com.zsy.producer.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author 郑书宇
@@ -18,28 +16,28 @@ import java.util.stream.Stream;
  */
 public class MyUserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
-    private UserDto userDto;
+    private User user;
 
-    public MyUserDetails(UserDto userDto){
-        this.userDto=userDto;
+    public MyUserDetails(User user){
+        this.user=user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+userDto.getRole().getName()));
-        grantedAuthorities.addAll(userDto.getPermissions().stream().map(permission -> new SimpleGrantedAuthority(permission.getName())).collect(Collectors.toList()));
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+user.getRole().getName()));
+        grantedAuthorities.addAll(user.getPermissions().stream().map(permission -> new SimpleGrantedAuthority(permission.getName())).collect(Collectors.toList()));
         return grantedAuthorities;
     }
 
     @Override
     public String getPassword() {
-        return userDto.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userDto.getUsername();
+        return user.getUsername();
     }
 
     @Override
@@ -62,7 +60,7 @@ public class MyUserDetails implements org.springframework.security.core.userdeta
         return true;
     }
 
-    public UserDto getUserDto() {
-        return userDto;
+    public User getUser() {
+        return user;
     }
 }

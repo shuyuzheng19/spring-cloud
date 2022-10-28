@@ -2,6 +2,7 @@ package com.zsy.producer.service.redis;
 
 import com.zsy.common.constants.TokenConstants;
 import com.zsy.producer.dto.UserDto;
+import com.zsy.producer.entity.User;
 import com.zsy.producer.utils.TokenUtils;
 import com.zsy.producer.vo.TokenInfoResponse;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,7 +22,7 @@ public class TokenService {
     @Resource
     private RedisTemplate redisTemplate;
 
-    public TokenInfoResponse createTokenToRedis(UserDto user){
+    public TokenInfoResponse createTokenToRedis(User user){
         String accessToken= TokenUtils.createAccessToken(user);
         String refreshToken=TokenUtils.createRefreshToken(user.getUsername());
         String encodingUsername= Base64Utils.encodeToString(user.getUsername().getBytes());

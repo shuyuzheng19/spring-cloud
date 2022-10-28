@@ -79,6 +79,13 @@ public class ResultResponse {
                 .build();
     }
 
+    public static ResultResponse fail(String message){
+        return new Builder()
+                .code(DEFAULT_FAIL.getCode())
+                .message(message)
+                .build();
+    }
+
     public static ResultResponse fail(ResultMessageStatus messageStatus){
         return new Builder()
                 .code(messageStatus.getCode())

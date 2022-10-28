@@ -25,9 +25,6 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("找不到该用户"));
-        System.out.println(user);
-        UserDto userDto = UserDto.builder().username(user.getUsername()).password(user.getPassword()).role(user.getRole()).permissions(user.getPermissions()).build();
-        System.out.println(userDto);
-        return new MyUserDetails(userDto);
+        return new MyUserDetails(user);
     }
 }

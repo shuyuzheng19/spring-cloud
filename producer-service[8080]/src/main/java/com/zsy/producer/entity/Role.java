@@ -23,4 +23,8 @@ public class Role {
 
     @Column(name="description")
     private String desc;
+
+    public Role(Integer id){
+        this.id=id;
+    }
 }

@@ -19,7 +19,8 @@ public class UserDto {
 
     private String password;
 
-    private Role role;
+    private String firstName;
 
-    private Set<Permission> permissions;
+    private String lastName;
+
 }
