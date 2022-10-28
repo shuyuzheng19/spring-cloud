@@ -1,11 +1,15 @@
 package com.zsy.producer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zsy.producer.dto.BookDto;
 import com.zsy.producer.entity.Permission;
 import com.zsy.producer.entity.Role;
 import com.zsy.producer.entity.User;
 import com.zsy.producer.repository.PermissionRepository;
 import com.zsy.producer.repository.RoleRepository;
 import com.zsy.producer.repository.UserRepository;
+import com.zsy.producer.service.kafka.KafkaBookService;
+import com.zsy.producer.utils.JsonUtils;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.dialect.MySQL8Dialect;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +40,16 @@ public class ProducerApplication {
 
     private final UserRepository userRepository;
 
-//    @Bean
+    private final KafkaBookService kafkaBookService;
+
+    @Bean
     CommandLineRunner commandLineRunner(){
         return args -> {
-            User user = initUser();
-            userRepository.save(user);
+            String uuid= UUID.randomUUID().toString();
+            BookDto bookDto = BookDto.builder().id(uuid).date(new Date()).name("java").build();
+            kafkaBookService.sendMessage(JsonUtils.objectToJsonString(bookDto));
+//            User user = initUser();
+//            userRepository.save(user);
 //            List<Role> roleList=initRole();
 //            List<Permission> permissionList=initPermission();
 //            roleRepository.saveAll(roleList);
